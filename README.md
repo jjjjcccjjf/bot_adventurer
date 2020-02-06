@@ -1,4 +1,4 @@
-# Adventure Bot
+# Adventurer Bot
 
 A text-based rpg adventure twitter bot
 

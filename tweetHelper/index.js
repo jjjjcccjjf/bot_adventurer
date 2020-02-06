@@ -10,15 +10,20 @@ let locations = []
 locations = [
 	{ 
 		name: "room", 
-		descriptions: ["dim", "brightly lit", "menacing", "dangerous", "normal", "common", "damp", "relatively safe", "foggy", "misty", "clear", "bright", "fine", "pretty regular", "eerie", "creepy", "dark", "safe", "creaking", "alright", "funny"] 
+		descriptions: ["dim", "brightly lit", "menacing", "dangerous", "normal", "common", "damp", "relatively safe", "foggy", "misty", "clear", "bright", "fine", "pretty regular", "eerie", "creepy", "dark", "safe", "creaking", "alright", "funny", "pretty normal", "normal", "normal", "normal", "normal", "normal"] 
 	}
 ];
 
 actions = [
 	{ 
 		name: "movement_between_rooms", 
-		descriptions: ["proceeded", "entered", "moved", "climbed", "ran", "walked", "strolled"] 
+		descriptions: ["proceeded", "entered", "moved", "went", "climbed", "ran", "walked", "strolled"] 
 	}
+	// ,
+	// { 
+	// 	name: "wait", 
+	// 	descriptions: ["waited", "stayed", "stayed put", "did nothing"] 
+	// }
 ];
 
 let resources = {
