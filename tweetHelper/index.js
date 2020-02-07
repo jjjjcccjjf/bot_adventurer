@@ -45,8 +45,8 @@ actions = [
 ambient = [
 	{
 		name: "smell", 
-		descriptions: ["the smell of fish"],
-		helper: ["wafted through your senses", "pervaded your nostrils"]
+		descriptions: ["the smell of fish", "a whiff of blood", "the smell of blood", "the stench of death", "the aroma of flowers", "the smell of coffee", "layers of dust", "the smell of the sea"],
+		helpers: ["wafted through your senses", "pervaded your nostrils", "came from somewhere", "was absent", "was vaguely present"]
 	}
 ]
 
@@ -112,11 +112,35 @@ function generateWaitPhrase(a, l) {
 	return "you " + a + " at the " + l + "."
 }
 
+function generateAmbient(ambient) {
+	let ambient_phrase = ""
+	switch (ambient.name) {
+		case 'smell':
+		ambient_phrase = ambient.descriptions[Math.floor(Math.random() * ambient.descriptions.length)] + " " + ambient.helpers[Math.floor(Math.random() * ambient.helpers.length)]
+	}
 
-exports.generate = function () {
-  return dispatch(resources)
+	return ambient_phrase
 }
 
+function randomAmbient(phrase, resources) {
+	let ambient = resources.ambient[Math.floor(Math.random() * resources.ambient.length)]
+
+	let ambient_array = [
+		phrase,
+		phrase,
+		phrase,
+		generateAmbient(ambient) + ". " + phrase,
+		phrase + " " + generateAmbient(ambient) + ".",
+		phrase,
+		phrase,
+	]
+	return ambient_array[Math.floor(Math.random() * ambient_array.length)]
+}
+
+exports.generate = function () {
+   let phrase = dispatch(resources)
+   return randomAmbient(phrase, resources)
+}
 
 
 /*
