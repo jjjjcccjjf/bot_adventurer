@@ -15,7 +15,7 @@ locations = [
 	},
 	{ 
 		name: "chamber", 
-		descriptions: ["dark", "scary", "brightly lit", "dim", "regular"] 
+		descriptions: ["dark", "scary", "brightly lit", "dim", "regular", "armoatic"] 
 	},
 	{ 
 		name: "cliff", 
@@ -49,17 +49,22 @@ actions = [
 ambient = [
 	{
 		name: "smell", 
-		descriptions: ["the smell of fish", "a whiff of blood", "the smell of blood", "the stench of death", "the aroma of flowers", "the smell of coffee", "layers of dust", "the smell of the sea", "the smell of pancakes", "the smell of lilacs", "the smell of waterlilies", "the smell of roses", "the smell of lavender", "the smell of dust", "the smell of old books", "the smell of old tomes", "the smell of rust"],
-		helpers: ["wafted through your senses", "pervaded your nostrils", "came from somewhere", "was absent", "was vaguely present", "remained"]
+		descriptions: ["the smell of fish", "a whiff of blood", "the smell of blood", "the stench of death", "the aroma of flowers", "the smell of coffee", "layers of dust", "the smell of the sea", "the smell of pancakes", "the smell of lilacs", "the smell of waterlilies", "the smell of roses", "the smell of lavender", "the smell of dust", "the smell of old books", "the smell of old tomes", "the smell of rust", "the smell of danger", "the smell of dried blood", "a small sandstorm"],
+		helpers: ["wafted through your senses", "pervaded your nostrils", "came from somewhere", "remained", "was vaguely present", "is in the air", "hung in the air", "made your nose twitch", "zapped your nose", "reached your nose", "passed by", "was noticeable", "was apparent", "haunted your senses", "made you sniff"]
 	},
 	{
 		name: "sight", 
-		descriptions: ["flickering lights", "a crack", "something shiny", "dust", "dark dust", "glowing dust", "cobwebs", "spider webs", "evil inscriptions", "foreign writing", "foreign scribbling", "a random gibberish on the ground", "a random gibberish on the walls", "a small foliage", "a small reflective surface", "a puddle", "a small body of water", "a trail of blood", "a pool of blood", "a puddle of blood", "a tiny corpse", "a small rock", "crystals", "small ornaments", "thingamabobs", "a small smear", "a tiny pebble", "a shining rock", "a shiny pebble", "a coarse surface", "a tiny frog", "a bug", "a creepy bug"],
+		descriptions: ["flickering lights", "a crack", "something shiny", "dust", "dark dust", "glowing dust", "cobwebs", "spider webs", "evil inscriptions", "foreign writing", "foreign scribbling", "a random gibberish on a surface", "a random gibberish on the walls", "a small foliage", "a small reflective surface", "a puddle", "a small body of water", "a trail of blood", "a pool of blood", "a puddle of blood", "a tiny corpse", "a small rock", "crystals", "small ornaments", "thingamabobs", "a small smear", "a tiny pebble", "a shining rock", "a shiny pebble", "a coarse surface", "a tiny frog", "a bug", "a creepy bug"],
 		helpers: ["glimmered in your peripheral vision", "shimmered in your peripheral vision", "was caught in your peripheral vision", "caught your eye", "caught your attention", "gleamed in the distance", "gleamed in the corner of your eye", "sparkled at the corner of your eye", "twitched at the corner of your eye", "lay on the path", "rested on the floor", "drew your attention", "grabbed your attention", "hung suspended in the air", "levitated to the side", "entered your vision"]
 	},
 	{
 		name: "feel",
-		descriptions: ["shuddered", "winced", "felt your hairs raise in fear", "felt comfortable", "felt alright", "felt fine", "felt dreamy", "were confused", "were alert", "were very alert", "felt apprehensive", "feel scared", "feel danger", "yawned", "felt your eyes tear up", "felt danger around the corner", "felt danger in the distance", "felt glorious", "felt bad", "felt exhausted", "started to  feel the exhaustion", "started to feel tired", "feel tired", "feel sleepy", "started to feel sleepy", "began to feel sleepy", "felt safe", "felt safe", "felt secured", "felt like someone is watching over you", "felt like someone is watching you", "felt safe", "felt good", "felt well-rested", "felt at ease", "felt cold", "felt hot", "felt warm", "felt OK"]
+		descriptions: ["shuddered", "winced", "felt your hairs raise in fear", "felt comfortable", "felt alright", "felt fine", "felt dreamy", "were confused", "were alert", "were very alert", "felt apprehensive", "feel scared", "feel danger", "yawned", "felt your eyes tear up", "felt danger around the corner", "felt danger in the distance", "felt glorious", "felt bad", "felt exhausted", "started to  feel the exhaustion", "started to feel tired", "feel tired", "feel sleepy", "started to feel sleepy", "began to feel sleepy", "felt safe", "felt safe", "felt secured", "felt like someone is watching over you", "felt like someone is watching you", "felt safe", "felt good", "felt well-rested", "felt at ease", "felt cold", "felt hot", "felt warm", "felt OK", "groaned", "sighed", "feel mighty", "think of happy thoughts", "think of memories of the past", "felt electric", "felt energized"]
+	},
+	{
+		name: "touch",
+		descriptions: ["something slimy", "something rough", "a spider", "a docile snake", "a critter", " a puddle", "a wet floor", "a wet wall", "some weird indentations on the ground", "some weird indentations on a wall", "a small alcove on the ground", "a small alcove on the wall", "something slippery", "something hairy", "something sharp", "something coarse", "the air", "the wind"],
+		helpers: ["your hands brushed against", "your feet brushed against", "your arms brushed against", "you bumped against", "you stepped on", "you accidentally touched", "your hands hit", "your feet hit", "your arms hit", "your right hand brushed against", "your left hand brushed against", "your left ear brushed against", "your right ear brushed against", "your hair brushed against"]
 	}
 ]
 
@@ -139,6 +144,10 @@ function generateAmbient(ambient) {
 		case 'feel':
 		ambient_phrase = "you " + ambient.descriptions[Math.floor(Math.random() * ambient.descriptions.length)]
 		break
+
+		case 'touch':
+		ambient_phrase = ambient.helpers[Math.floor(Math.random() * ambient.helpers.length)] + " " + ambient.descriptions[Math.floor(Math.random() * ambient.descriptions.length)]
+		break
 	}
 
 	return ambient_phrase
@@ -153,22 +162,28 @@ function randomAmbient(phrase, resources) {
 		phrase,
 
 		generateAmbient(ambient) + ". " + phrase,
+		
+		generateAmbient(resources.ambient[2]) + ".",
+
+		generateAmbient(resources.ambient[3]) + ".",
+
+		generateAmbient(resources.ambient[3]) + ". and yet, " + phrase,
 
 		generateAmbient(ambient) + " while " + phrase,
 
 		phrase + " " + generateAmbient(ambient) + ".",
 
-		generateAmbient(resources.ambient[1]) + ". " + phrase + " " + generateAmbient(resources.ambient[0]) + ".",
+		phrase + " " + generateAmbient(resources.ambient[3]) + ".",
 
-		generateAmbient(resources.ambient[1]) + " while " + phrase + " " + generateAmbient(resources.ambient[0]) + ", but " + generateAmbient(resources.ambient[2]) + ".",
+		generateAmbient(resources.ambient[1]) + ". " + phrase + " " + generateAmbient(resources.ambient[0]) + ".",
 
 		generateAmbient(resources.ambient[1]) + " while " + phrase + " " + generateAmbient(resources.ambient[0]) + " and " + generateAmbient(resources.ambient[2]) + ".",
 
 		generateAmbient(resources.ambient[1]) + " while " + phrase + " " + generateAmbient(resources.ambient[0]) + ". " + generateAmbient(resources.ambient[2]) + ".",
 
-		generateAmbient(resources.ambient[1]) + " as " + phrase + " " + generateAmbient(resources.ambient[0]) + ", but " + generateAmbient(resources.ambient[2]) + ".",
+		generateAmbient(resources.ambient[1]) + " as " + phrase + " " + generateAmbient(resources.ambient[0]) + ". " + generateAmbient(resources.ambient[2]) + ".",
 
-		generateAmbient(resources.ambient[1]) + ". " + phrase + " " + generateAmbient(resources.ambient[0]) + ", but " + generateAmbient(resources.ambient[2]) + ".",
+		// generateAmbient(resources.ambient[1]) + ". " + phrase + " " + generateAmbient(resources.ambient[0]) + ", but " + generateAmbient(resources.ambient[2]) + ".",
 
 		phrase,
 	]
